@@ -99,6 +99,8 @@ public class Main {
             """;
 
     private static double scaleFactor = 1;
+    private static double positionX = 0;
+    private static double positionY = 0;
 
     private static class BufferDrawer extends JPanel {
 
@@ -117,6 +119,7 @@ public class Main {
             Graphics2D gfx = (Graphics2D) g.create(); // Create a copy of the graphics context
             gfx.setBackground(Color.BLACK);
             gfx.scale(scaleFactor, scaleFactor);
+            gfx.translate(-positionX, positionY);
 
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < W; j++) {
@@ -163,7 +166,11 @@ public class Main {
                 public void keyPressed(KeyEvent e) {
                     switch (e.getKeyCode()) {
                         case KeyEvent.VK_MINUS -> scaleFactor -= 0.1;
-                        case KeyEvent.VK_PLUS -> scaleFactor += 0.1;
+                        case KeyEvent.VK_EQUALS -> scaleFactor += 0.1;
+                        case KeyEvent.VK_UP -> positionY += 2;
+                        case KeyEvent.VK_DOWN -> positionY -= 2;
+                        case KeyEvent.VK_RIGHT -> positionX += 2;
+                        case KeyEvent.VK_LEFT -> positionX -= 2;
                     }
                 }
             });
